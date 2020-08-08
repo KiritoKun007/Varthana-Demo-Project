@@ -7,6 +7,11 @@ CREATE TABLE colors (
     is_fav BOOLEAN NOT NULL 
 );
 
+-- adding colors in the database
+
+INSERT INTO colors (name, hex_code, is_fav) 
+VALUES (value1, value2, value3);
+
 -- getting all the colors stored in the database
 
 SELECT * FROM colors;
