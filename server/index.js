@@ -34,6 +34,20 @@ app.get("/colors", async (req, res) => {
     }
 });
 
+app.put("/colors/fav", async (req, res) => {
+    try {
+        const { fav } = req.body
+
+        const colorIds = fav.join(', ')
+
+        const favColors = await pool.query(`UPDATE colors SET is_fav = TRUE WHERE color_id IN (${colorIds})`);
+
+        res.json("Selected colors favourited.")
+    } catch (err) {
+        console.error(err.message)
+    }
+})
+
 // PORT
 app.listen(5000, () => {
     console.log("Server has started on port 5000")
