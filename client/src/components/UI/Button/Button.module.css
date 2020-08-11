@@ -1,0 +1,13 @@
+.cancel {
+    background-color: indianred;
+}
+
+.save {
+    background-color: lightgreen;
+}
+
+.save:disabled,
+.cancel:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}

@@ -23,7 +23,7 @@ const ColorChip = ({ color }) => {
                 opacity: isDragging? 0.2: 1
             }} >
             <div style={{backgroundColor: color.hex_code}} className={classes.colorChip}>
-                <p>{color.hex_code}</p>
+                <p>{color.name}</p>
             </div>
         </div>
     )

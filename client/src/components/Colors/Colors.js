@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // actions
@@ -12,16 +12,21 @@ import ColorBox from './Box/ColorBox';
 import FavColorBox from './Box/FavColorBox';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../../util/items';
+import Button from '../UI/Button/Button';
 
 const Colors = () => {
 
     const colors = useSelector(state => state.colors.colors)
+
+    const favColorsId = useSelector(state => state.colors.favColorsId)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(actions.getColors())
     }, [dispatch])
+
+    const [isDisabled, setisDisabled] = useState(true)
 
     let allColorExceptFav = []
     let favColors = []
@@ -32,6 +37,7 @@ const Colors = () => {
     }
 
     const favouriteColor = (id) => {
+        setisDisabled(false)
         dispatch(actions.favColor(id))
     }
 
@@ -42,6 +48,15 @@ const Colors = () => {
             isOver: !!monitor.isOver()
         })
     })
+
+    const onCancelHandler = () => {
+        window.location = "/";
+    }
+
+    const onSaveHandler = (e) => {
+        e.preventDefault();
+        dispatch(actions.saveFavColors(favColorsId))
+    }
 
     return (
         <div className={classes.screenBackground}>
@@ -59,11 +74,23 @@ const Colors = () => {
                 style={{
                     boxShadow: isOver? '3px 3px 6px #ccc': '3px 3px 6px #eee',
                 }} >
-                <h4>Favourite Colors</h4>
-                <div className={classes.dFlex}>
-                    <FavColorBox 
-                        colors={favColors}
-                        isDrag={false} />
+                <div>
+                    <h4>Favourite Colors</h4>
+                    <div className={classes.dFlex}>
+                        <FavColorBox 
+                            colors={favColors}
+                            isDrag={false} />
+                    </div>
+                </div>
+                <div className={classes.btnContainer}>
+                    <Button 
+                        btnType="cancel" 
+                        isDisabled={isDisabled}
+                        clicked={onCancelHandler} >CANCEL</Button>
+                    <Button 
+                        btnType="save" 
+                        isDisabled={isDisabled}
+                        clicked={e => onSaveHandler(e)} >SAVE</Button>
                 </div>
             </div>
         </div>

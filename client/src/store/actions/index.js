@@ -1,4 +1,5 @@
 export {
     getColors,
-    favColor
+    favColor,
+    saveFavColors
 } from './colors';

@@ -26,3 +26,23 @@ export const favColor = (id) => {
         })
     }
 }
+
+export const saveFavColors = (fav) => {
+    return async dispatch => {
+        try {
+            const body = { fav }
+    
+            const updateResponse = await fetch(`http://localhost:5000/colors/fav`, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+            }) 
+    
+            window.location = "/";
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+}
