@@ -1,6 +1,6 @@
 .screenBackground {
     background-color: #fafafa;
-    color: #111517;
+    color: #fafafa;
     min-height: 100vh;
     padding: 2rem 1rem;
     display: flex;
@@ -14,5 +14,14 @@
     border-radius: 5px;
     padding: 10px;
     box-shadow: 3px 3px 6px #eee;
+}
+
+.dFlex {
     display: flex;
+    flex-wrap: wrap;
+}
+
+h4 {
+    text-align: center;
+    color: black;
 }

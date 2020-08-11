@@ -1,1 +1,2 @@
 export const GET_ALL_COLORS = "GET_ALL_COLORS";
+export const DRAGGED_FAV_COLOR = "DRAGGED_FAV_COLOR";

@@ -17,3 +17,12 @@ export const getColors = () => {
         }
     }
 }
+
+export const favColor = (id) => {
+    return dispatch => {
+        dispatch({
+            type: actionTypes.DRAGGED_FAV_COLOR,
+            id: id
+        })
+    }
+}

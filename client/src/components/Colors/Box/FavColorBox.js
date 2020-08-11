@@ -1,7 +1,7 @@
 import React from 'react'
 import ColorChip from '../Chip/ColorChip'
 
-const ColorBox = ({ colors, isDrag }) => {
+const FavColorBox = ({ colors, isDrag }) => {
 
     console.log(colors)
 
@@ -17,4 +17,4 @@ const ColorBox = ({ colors, isDrag }) => {
     return colorChips
 }
 
-export default ColorBox
+export default FavColorBox

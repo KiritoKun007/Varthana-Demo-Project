@@ -9,7 +9,9 @@ import classes from './Color.module.css'
 
 // component
 import ColorBox from './Box/ColorBox';
-
+import FavColorBox from './Box/FavColorBox';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from '../../util/items';
 
 const Colors = () => {
 
@@ -29,16 +31,40 @@ const Colors = () => {
         favColors = colors.filter(color => color.is_fav === true)
     }
 
+    const favouriteColor = (id) => {
+        dispatch(actions.favColor(id))
+    }
+
+    const [{isOver}, drop] = useDrop({
+        accept: ItemTypes.CHIP,
+        drop: (item, monitor) => favouriteColor(item.id), 
+        collect: monitor => ({
+            isOver: !!monitor.isOver()
+        })
+    })
+
     return (
         <div className={classes.screenBackground}>
             <div className={classes.leftBox}>
-                <ColorBox 
-                    colors={allColorExceptFav} />
+                <h4>Colors</h4>
+                <div className={classes.dFlex}>
+                    <ColorBox 
+                        colors={allColorExceptFav}
+                        isDrag={true} />
+                </div>
             </div>
-            <div className={classes.rightBox}>
-                <ColorBox 
-                    colors={favColors}
-                    isFav={true} />
+            <div 
+                className={classes.rightBox} 
+                ref={drop}
+                style={{
+                    boxShadow: isOver? '3px 3px 6px #ccc': '3px 3px 6px #eee',
+                }} >
+                <h4>Favourite Colors</h4>
+                <div className={classes.dFlex}>
+                    <FavColorBox 
+                        colors={favColors}
+                        isDrag={false} />
+                </div>
             </div>
         </div>
     )
