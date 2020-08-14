@@ -1,0 +1,9 @@
+.toolbar {
+    height: 10vh;
+    background-color: white;
+    box-shadow: rgb(238, 238, 238) 3px 3px 6px;
+}
+
+.toolbar nav {
+    height: 100%;
+}
