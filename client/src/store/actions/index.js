@@ -3,3 +3,7 @@ export {
     favColor,
     saveFavColors
 } from './colors';
+
+export {
+    registerForm
+} from './auth'

@@ -20,33 +20,34 @@ import { useState } from 'react';
 
 import Login from './components/Auth/Login/Login';
 import Register from './components/Auth/Register/Register';
+import { useSelector } from 'react-redux';
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const isAuthenticated = useSelector(state => state.auth.isAuth)
 
   const setAuth = (bool) => {
-    setIsAuthenticated(bool)
+    // setIsAuthenticated(bool)
   }
 
-  const isAuth = async () => {
-    try {
+  // const isAuth = async () => {
+  //   try {
 
-      const response = await fetch("http://localhost:5000/auth/verify", {
-        method: "GET",
-        headers: {
-          token: localStorage.token
-        }
-      })      
+  //     const response = await fetch("http://localhost:5000/auth/verify", {
+  //       method: "GET",
+  //       headers: {
+  //         token: localStorage.token
+  //       }
+  //     })      
 
-      const resData = await response.json();
+  //     const resData = await response.json();
 
-      resData === true ? setIsAuthenticated(true): setIsAuthenticated(false);
+  //     resData === true ? setIsAuthenticated(true): setIsAuthenticated(false);
       
-    } catch (err) {
-      console.error(err.message)
-    }
-  }
+  //   } catch (err) {
+  //     console.error(err.message)
+  //   }
+  // }
 
   useEffect(() => {
     // isAuth()

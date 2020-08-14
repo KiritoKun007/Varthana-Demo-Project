@@ -1,0 +1,32 @@
+.Registration {
+    width: 50%;
+    margin: 3rem auto;
+    padding: 2rem;
+}
+
+.Registration h4 {
+    text-align: left;
+    margin: 0 1rem 1rem;
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+}
+
+.signup {
+    font-size: 16px;
+    font-weight: 800;
+    height: 48px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #8f5c2c;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.signup:hover {
+    background-color: #40a4c8;
+}
