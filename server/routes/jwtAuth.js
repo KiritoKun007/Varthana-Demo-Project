@@ -97,7 +97,10 @@ router.post("/login", validInfo, async (req, res) => {
 router.get("/verify", auth, async (req, res) => {
     try {
 
-        res.json(true);
+        res.json({
+            isAuth: true,
+            expiryTime: req.expiresIn
+        });
         
     } catch (err) {
         console.error(err.message)

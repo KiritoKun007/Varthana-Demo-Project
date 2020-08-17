@@ -3,9 +3,20 @@ import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 import { useSelector } from 'react-redux';
 
+const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 const NavigationItems = () => {
 
     const isAuthenticated = useSelector(state => state.auth.isAuth);
+    const user = useSelector(state => state.auth.user);
+
+    let logout = ''
+
+    if(user) {
+        logout = capitalizeFirstLetter(user.user_name);
+    }
 
     return (
         <ul className={classes.NavigationItems}>
@@ -20,8 +31,8 @@ const NavigationItems = () => {
                         </NavigationItem>
                     </Fragment>
                 ) : (
-                    <NavigationItem link="/logout" >
-                        Logout
+                    <NavigationItem link="/user" >
+                        {logout}
                     </NavigationItem>
                 )
             }

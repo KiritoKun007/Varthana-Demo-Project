@@ -15,6 +15,7 @@ module.exports = async (req, res, next) => {
         console.log(payload)
 
         req.user = payload.user;
+        req.expiresIn = payload.exp;
         
         next();
 

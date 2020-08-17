@@ -57,12 +57,10 @@ export const loginForm = (inputs) => {
 }
 
 export const logout = () => {
-    return dispatch => {
-        localStorage.removeItem("token")
+    localStorage.removeItem("token")
 
-        dispatch({
-            type: actionTypes.LOGOUT
-        })
+    return {
+        type: actionTypes.LOGOUT
     }
 }
 
@@ -83,8 +81,9 @@ export const verifyAuth = () => {
                 dispatch({
                     type: actionTypes.IS_AUTH,
                     payload: {
-                        isAuth: resData,
-                        token: localStorage.token
+                        isAuth: resData.isAuth,
+                        token: localStorage.token,
+                        expiresIn: resData.expiryTime
                     }
                 });
             }        

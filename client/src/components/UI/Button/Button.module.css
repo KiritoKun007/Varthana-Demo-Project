@@ -1,9 +1,7 @@
-.cancel {
-    background-color: indianred;
-}
-
-.save {
-    background-color: lightgreen;
+.cancel:hover,
+.save:hover {
+    color: #40a4c8;
+    border-color: #40a4c8;
 }
 
 .save:disabled,

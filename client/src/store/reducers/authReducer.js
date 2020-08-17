@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     isAuth: false,
     token: null,
-    user: null
+    user: null,
+    expire: null
 }
 
 const authReducer = (state = initialState, action) => {
@@ -34,7 +35,8 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuth: action.payload.isAuth ? true : false,
-                token: action.payload.token
+                token: action.payload.token,
+                expire: action.payload.expiresIn
             }
 
         case actionTypes.GET_USER:

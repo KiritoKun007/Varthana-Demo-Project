@@ -8,6 +8,8 @@ import { Redirect } from 'react-router-dom'
 
 const Logout = () => {
 
+    console.log("Logout.js reached")
+
     const dispatch = useDispatch()
 
     const logout = () => {

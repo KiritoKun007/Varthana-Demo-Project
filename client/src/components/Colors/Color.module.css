@@ -45,5 +45,7 @@ h4 {
     font-family: inherit;
     cursor: pointer;
     margin: 0 5px;
-    color: black;
+    color: #8f5c2c;
+    border: 2px solid;
+    background-color: white;
 }
