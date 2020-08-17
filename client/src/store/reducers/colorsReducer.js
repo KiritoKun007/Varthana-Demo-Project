@@ -2,13 +2,20 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     colors: [],
+    newFavColorsId: [],
     favColorsId: []
 };
 
 const getAllColors = (state, action) => {
+    const colors = action.colors.map(color => {
+        color.is_fav = false;
+
+        return color
+    });
     return {
         ...state,
-        colors: action.colors
+        newFavColorsId: [],
+        colors: colors
     }
 }
 
@@ -23,7 +30,30 @@ const draggedFavColor = (state, action) => {
     return {
         ...state,
         colors: fav,
-        favColorsId: [...state.favColorsId].concat(action.id)
+        newFavColorsId: [...state.newFavColorsId].concat(action.id)
+    }
+}
+
+const getFavColorsIds = (state, action) => {
+
+    let arr = []
+
+    arr = action.ids.reduce((prevArr, curr) => {
+        return prevArr.concat(curr.color_id)
+    }, [])
+
+    const colors = [...state.colors].map(color => {
+        if(arr.includes(color.color_id)) {
+            color.is_fav = true
+        }
+
+        return color
+    })
+
+    return {
+        ...state,
+        colors: colors,
+        favColorsId: arr
     }
 }
 
@@ -31,6 +61,7 @@ const colorsReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_ALL_COLORS: return getAllColors(state, action);
         case actionTypes.DRAGGED_FAV_COLOR: return draggedFavColor(state, action);
+        case actionTypes.GET_FAV_COLOR_IDS: return getFavColorsIds(state, action);
         default:
             return state;
     }

@@ -19,13 +19,8 @@ a {
     border-bottom: 4px solid transparent;
 }
 
-.active {
-    color: #40a4c8;
-    border-bottom-color: #40a4c8;
-}
-
 a:hover,
-a:active {
+.is_active {
     color: #40a4c8;
     border-bottom-color: #40a4c8;
 }

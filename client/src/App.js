@@ -16,42 +16,23 @@ import {
 } from 'react-router-dom'
 
 import { useEffect } from 'react';
-import { useState } from 'react';
 
 import Login from './components/Auth/Login/Login';
 import Register from './components/Auth/Register/Register';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import Logout from './components/Auth/Logout/Logout';
+
+import * as actions from './store/actions/index';
 
 function App() {
 
   const isAuthenticated = useSelector(state => state.auth.isAuth)
 
-  const setAuth = (bool) => {
-    // setIsAuthenticated(bool)
-  }
-
-  // const isAuth = async () => {
-  //   try {
-
-  //     const response = await fetch("http://localhost:5000/auth/verify", {
-  //       method: "GET",
-  //       headers: {
-  //         token: localStorage.token
-  //       }
-  //     })      
-
-  //     const resData = await response.json();
-
-  //     resData === true ? setIsAuthenticated(true): setIsAuthenticated(false);
-      
-  //   } catch (err) {
-  //     console.error(err.message)
-  //   }
-  // }
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    // isAuth()
-  }, [])
+    dispatch(actions.verifyAuth())
+  }, [dispatch])
 
   return (
     <Fragment>
@@ -65,7 +46,7 @@ function App() {
               path="/login"
               render={props => 
                 !isAuthenticated ? (
-                  <Login {...props} setAuth={setAuth} />
+                  <Login {...props} />
                 ) : (
                   <Redirect to="/color" />
                 ) } />
@@ -75,7 +56,7 @@ function App() {
               path="/register"
               render={props => 
                 !isAuthenticated ? (
-                  <Register {...props} setAuth={setAuth} />
+                  <Register {...props} />
                 ) : (
                   <Redirect to="/login" />
                 ) } />
@@ -88,6 +69,16 @@ function App() {
                   <DndProvider backend={HTML5Backend}>
                     <Colors {...props} />
                   </DndProvider>
+                ) : (
+                  <Redirect to="/login" />
+                ) } />
+
+            <Route 
+              exact
+              path="/logout"
+              render={
+                props => isAuthenticated ? (
+                  <Logout />
                 ) : (
                   <Redirect to="/login" />
                 ) } />

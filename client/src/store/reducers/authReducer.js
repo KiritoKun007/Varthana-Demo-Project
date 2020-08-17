@@ -2,7 +2,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     isAuth: false,
-    token: null
+    token: null,
+    user: null
 }
 
 const authReducer = (state = initialState, action) => {
@@ -12,6 +13,34 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuth: true,
                 token: action.token
+            }
+
+        case actionTypes.LOGIN:
+            return {
+                ...state,
+                isAuth: true,
+                token: action.token
+            }
+
+        case actionTypes.LOGOUT:
+            return {
+                ...state,
+                isAuth: false,
+                token: null
+            }
+
+        case actionTypes.IS_AUTH:           
+
+            return {
+                ...state,
+                isAuth: action.payload.isAuth ? true : false,
+                token: action.payload.token
+            }
+
+        case actionTypes.GET_USER:
+            return {
+                ...state,
+                user: action.user
             }
     
         default:

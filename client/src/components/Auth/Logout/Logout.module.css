@@ -1,0 +1,32 @@
+.Logout {
+    width: 50%;
+    margin: 3rem auto;
+    padding: 2rem;
+}
+
+.Logout h4 {
+    text-align: left;
+    margin: 0 1rem 1rem;
+}
+
+.btnContainer {
+    display: flex;
+    margin: 0 1rem;
+}
+
+.btnContainer button {
+    background: none;
+    border: none;
+    color: #8f5c2c;
+    cursor: pointer;
+    font-weight: 800;
+    outline: none;
+}
+
+.btnContainer button:focus {
+    outline: none;
+}
+
+.btnContainer button:hover {
+    color: #40a4c8;
+}

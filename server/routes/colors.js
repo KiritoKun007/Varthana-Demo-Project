@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const pool = require("../db");
+const auth = require("../middleware/auth");
 
 // Adding colors
 
@@ -28,15 +29,42 @@ router.get("/", async (req, res) => {
     }
 });
 
+// get fav color id
+
+router.get("/favIds", auth, async (req, res) => {
+
+    try {
+        const favColorIds = await pool.query(`select * from favcolor where user_id = $1`, [req.user])
+
+        res.json(favColorIds.rows)        
+        
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json("Server Error!!");
+    }
+
+})
+
 // Save favourite colors
 
-router.put("/fav", async (req, res) => {
+router.post("/fav", auth, async (req, res) => {
     try {
         const { fav } = req.body
 
-        const colorIds = fav.join(', ')
+        const userId = req.user
 
-        const favColors = await pool.query(`UPDATE colors SET is_fav = TRUE WHERE color_id IN (${colorIds})`);
+        const colorIds = fav.reduce((prevStr, curr, currIndex) => {
+
+            if(fav.length === currIndex + 1) {
+                return prevStr + `('${userId}', ${curr})`
+            }
+
+            return prevStr + `('${userId}', ${curr}), `
+        }, '')
+
+        console.log(colorIds);
+
+        const favColors = await pool.query(`INSERT INTO favcolor (user_id, color_id) VALUES ${colorIds}`);
 
         res.json("Selected colors favourited.")
     } catch (err) {

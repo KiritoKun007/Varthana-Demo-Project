@@ -66,6 +66,12 @@ router.post("/login", validInfo, async (req, res) => {
             return res.status(401).json("Password or Email is incorrect.");
         }
 
+        // 2.5 Check if it is an active user or not 
+
+        if(!user.rows[0].is_active) {
+            return res.status(403).json("Account is inactive");
+        }
+
         // 3. check if incoming password is the same as the database password
 
         const validPassword = await bcrypt.compare(password, user.rows[0].user_password)

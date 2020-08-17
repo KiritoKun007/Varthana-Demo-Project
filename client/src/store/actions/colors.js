@@ -18,6 +18,31 @@ export const getColors = () => {
     }
 }
 
+export const getFavColorsId = () => {
+    return async dispatch => {
+        try {
+            const favColorId = await fetch("http://localhost:5000/colors/favIds", {
+                method: 'GET',
+                headers: {
+                    token: localStorage.token
+                }
+            });
+
+            const favColorIdData = await favColorId.json();
+
+            console.log(favColorIdData)
+
+            dispatch({
+                type: actionTypes.GET_FAV_COLOR_IDS,
+                ids: favColorIdData
+            })
+
+        } catch (err) {
+            console.error(err.message)            
+        }
+    }
+}
+
 export const favColor = (id) => {
     return dispatch => {
         dispatch({
@@ -33,9 +58,10 @@ export const saveFavColors = (fav) => {
             const body = { fav }
     
             const updateResponse = await fetch(`http://localhost:5000/colors/fav`, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    token: localStorage.token
                 },
                 body: JSON.stringify(body)
             }) 

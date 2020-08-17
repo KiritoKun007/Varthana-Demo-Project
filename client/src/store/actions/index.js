@@ -1,9 +1,17 @@
 export {
     getColors,
     favColor,
-    saveFavColors
+    saveFavColors,
+    getFavColorsId,
 } from './colors';
 
 export {
-    registerForm
+    registerForm,
+    loginForm,
+    logout,
+    verifyAuth
 } from './auth'
+
+export {
+    getUser
+} from './user'

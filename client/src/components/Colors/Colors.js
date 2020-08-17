@@ -18,12 +18,18 @@ const Colors = () => {
 
     const colors = useSelector(state => state.colors.colors)
 
-    const favColorsId = useSelector(state => state.colors.favColorsId)
+    const favColorsId = useSelector(state => state.colors.newFavColorsId)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(actions.getColors())
+
+        dispatch(actions.getUser());
+
+        dispatch(actions.getColors());
+
+        dispatch(actions.getFavColorsId());
+
     }, [dispatch])
 
     const [isDisabled, setisDisabled] = useState(true)
