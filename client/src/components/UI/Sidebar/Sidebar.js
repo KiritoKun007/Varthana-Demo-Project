@@ -12,10 +12,10 @@ const Sidebar = () => {
 
             <ul>
                 <li>
-                    <NavLink to={url}>Profile</NavLink>
+                    <NavLink to={url} activeClassName={classes.is_active} exact >Profile</NavLink>
                 </li>
                 <li>
-                    <NavLink to={`${url}/logout`} >Logout</NavLink>
+                    <NavLink to={`${url}/logout`} activeClassName={classes.is_active} >Logout</NavLink>
                 </li>
             </ul>
 

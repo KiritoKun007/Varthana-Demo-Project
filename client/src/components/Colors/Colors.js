@@ -56,7 +56,7 @@ const Colors = () => {
     })
 
     const onCancelHandler = () => {
-        window.location = "/";
+        window.location = "/color";
     }
 
     const onSaveHandler = (e) => {

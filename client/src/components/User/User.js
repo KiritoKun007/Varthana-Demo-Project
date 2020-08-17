@@ -6,6 +6,7 @@ import Logout from '../Auth/Logout/Logout';
 import Sidebar from '../UI/Sidebar/Sidebar';
 
 import classes from './User.module.css';
+import EditProfile from './Profile/EditProfile/EditProfile';
 
 const User = () => {
 
@@ -19,12 +20,11 @@ const User = () => {
             <Sidebar />
 
             <Switch>
-                <Route path={`${path}/logout`} >
-                    <Logout />
-                </Route>
                 <Route exact path={path} >
                     <Profile />
                 </Route>
+                <Route path={`${path}/logout`} component={Logout} />
+                <Route path={`${path}/edit`} component={EditProfile} />
             </Switch>
         </div>
     )

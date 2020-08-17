@@ -6,6 +6,11 @@
 
 .save:disabled,
 .cancel:disabled {
-    background-color: grey;
+    background-color: #deb;
     cursor: not-allowed;
+}
+
+.cancel:focus,
+.save:focus {
+    outline: none;
 }

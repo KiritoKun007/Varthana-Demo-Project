@@ -1,0 +1,41 @@
+.container {
+    padding: 2rem;
+    width: 100%;
+}
+
+.container h4 {
+    text-align: left;
+    margin: 0 1rem 1rem;
+}
+
+.editProfileForm {
+    margin: 1rem;
+}
+
+.formGroup label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btnContainer {
+    padding: 1rem 0;
+}
+
+.btnContainer button {
+    background: none;
+    color: #8f5c2c;
+    font-size: 13px;
+    padding: 8px 15px;
+    margin-right: 1rem;
+    border: 2px solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnContainer button:hover {
+    color: #40a4c8;
+}
+
+.btnContainer button:focus {
+    outline: none;
+}

@@ -13,5 +13,6 @@ export {
 } from './auth'
 
 export {
-    getUser
+    getUser,
+    editUser
 } from './user'

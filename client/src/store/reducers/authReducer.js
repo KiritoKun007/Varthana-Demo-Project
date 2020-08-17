@@ -44,6 +44,12 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 user: action.user
             }
+
+        case actionTypes.EDIT_USER:
+            return {
+                ...state,
+                user: action.user
+            }
     
         default:
             return state

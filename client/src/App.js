@@ -23,6 +23,7 @@ import {
 } from 'react-router-dom'
 
 import * as actions from './store/actions/index';
+import Toolbar from './components/Toolbar/Toolbar';
 
 function App() {
 
@@ -45,12 +46,12 @@ function App() {
   return (
     <Fragment>
       <Router>
-        <Layout>
+
+        <Toolbar />
 
           <Switch>
 
-          <Route 
-              exact
+            <Route 
               path="/color"
               render={
                 props => isAuthenticated ? (
@@ -62,7 +63,6 @@ function App() {
                 ) } />
 
             <Route 
-              exact
               path="/user"
               render={
                 props => isAuthenticated ? (
@@ -72,7 +72,6 @@ function App() {
                 ) } />  
 
             <Route 
-              exact
               path="/login"
               render={props => 
                 !isAuthenticated ? (
@@ -82,7 +81,6 @@ function App() {
                 ) } />
 
             <Route
-              exact
               path="/register"
               render={props => 
                 !isAuthenticated ? (
@@ -94,7 +92,6 @@ function App() {
             { !isAuthenticated && <Redirect to="/login" from="/" /> }
 
           </Switch>
-        </Layout>
       </Router>
     </Fragment>
   );

@@ -2,3 +2,24 @@
     width: 25%;
     padding: 0 5px;
 }
+
+.Sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.Sidebar a {
+    border-bottom: none;
+    border-right: 5px solid transparent;
+    margin: 5px 0;
+    padding: 6px 15px;
+}
+
+.Sidebar a:hover {
+    border-right-color: #40a4c8;
+}
+
+a.is_active {
+    border-right-color: #40a4c8;
+    color: #40a4c8;
+}

@@ -26,7 +26,7 @@ input {
     transition: border-color ease-in-out .08s, box-shadow ease-in-out .08s;
     border-radius: 5px;
     color: #29303b;
-    font-size: 18px;
+    font-size: 14px;
     height: auto;
     padding: 11px 45px 12px 40px;
     margin-bottom: 1rem;
