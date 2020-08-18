@@ -10,7 +10,6 @@ import './App.css';
 // Components
 
 import Colors from './components/Colors/Colors';
-import Layout from './hoc/Layout/Layout';
 import Login from './components/Auth/Login/Login';
 import Register from './components/Auth/Register/Register';
 import User from './components/User/User';

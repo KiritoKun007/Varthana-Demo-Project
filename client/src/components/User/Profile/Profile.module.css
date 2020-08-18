@@ -25,6 +25,10 @@
     font-size: 13px;
 }
 
+.btnContainer {
+    padding: 1rem 0;
+}
+
 .profileContainer button {
     padding: 5px 15px;
     border-radius: 4px;

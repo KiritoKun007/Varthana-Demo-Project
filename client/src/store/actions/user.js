@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import { logout } from './auth';
 
 export const getUser = () => {
     return async dispatch => {
@@ -43,6 +44,25 @@ export const editUser = (user) => {
                 type: actionTypes.EDIT_USER,
                 user: data
             })
+
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+}
+
+export const inActiveUser = () => {
+    return async dispatch => {
+        try {
+            
+            const inActive = await fetch("http://localhost:5000/user/inActive", {
+                method: 'PUT',
+                headers: {
+                    token: localStorage.token
+                }
+            })
+
+            dispatch(logout())
 
         } catch (err) {
             console.error(err.message)

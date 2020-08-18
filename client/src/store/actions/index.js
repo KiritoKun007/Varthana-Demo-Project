@@ -14,5 +14,6 @@ export {
 
 export {
     getUser,
-    editUser
+    editUser,
+    inActiveUser
 } from './user'

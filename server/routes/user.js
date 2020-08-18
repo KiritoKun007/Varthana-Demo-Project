@@ -31,4 +31,17 @@ router.put("/edit", auth, async (req, res) => {
     }
 } )
 
+router.put("/inActive", auth, async (req, res) => {
+    try {
+        
+        const inActiveUser = await pool.query("UPDATE users SET is_active = FALSE WHERE user_id = $1", [req.user])
+
+        res.json("Users account is inactivated!!");
+
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).json("Server Error!!")
+    }
+})
+
 module.exports = router;

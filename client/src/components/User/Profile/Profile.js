@@ -1,12 +1,16 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import classes from './Profile.module.css';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
+import * as actions from '../../../store/actions'
+
 const Profile = () => {
 
     const user = useSelector(state => state.auth.user)
+
+    const dispatch = useDispatch()
 
     let history = useHistory();
     let { url } = useRouteMatch();
@@ -17,6 +21,12 @@ const Profile = () => {
         e.preventDefault()
         history.push(`${url}/edit`)
     }
+
+    const inactiveHandler = (e) => {
+        e.preventDefault()
+
+        dispatch(actions.inActiveUser())
+    } 
 
     return (
         <div className={classes.profileContainer}>
@@ -35,7 +45,10 @@ const Profile = () => {
                 </div>
             </div>
 
-            <button onClick={e => editProfileHandler(e)} >Edit</button>
+            <div className={classes.btnContainer}>
+                <button onClick={e => editProfileHandler(e)} >Edit</button>
+                <button onClick={e => inactiveHandler(e)} >Inactive</button>
+            </div>
         </div>
     )
 }

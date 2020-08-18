@@ -31,9 +31,14 @@ const NavigationItems = () => {
                         </NavigationItem>
                     </Fragment>
                 ) : (
-                    <NavigationItem link="/user" >
-                        {logout}
-                    </NavigationItem>
+                    <Fragment>
+                        <NavigationItem link="/color" >
+                            Home
+                        </NavigationItem>
+                        <NavigationItem link="/user" >
+                            {logout}
+                        </NavigationItem>
+                    </Fragment>
                 )
             }
         </ul>
