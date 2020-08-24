@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const pool = require("../db");
 const auth = require("../middleware/auth");
+const query = require("../queries/queries");
 
 // Adding colors
 
@@ -8,8 +9,7 @@ router.post("/", async (req, res) => {
     try {
         const { name, hexcode } = req.body;
 
-        const newColor = await pool.query(`INSERT INTO colors (name, hex_code, is_fav) 
-                                           VALUES($1, $2, FALSE) RETURNING *`, [name, hexcode])
+        const newColor = await pool.query(query.colors.ADD_COLOR, [name, hexcode])
 
         res.json(newColor.rows[0])
     } catch (err) {
@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const allColors = await pool.query(`SELECT * FROM colors`);
+        const allColors = await pool.query(query.colors.GET_ALL_COLORS);
 
         res.json(allColors.rows)
     } catch (err) {
@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
 router.get("/favIds", auth, async (req, res) => {
 
     try {
-        const favColorIds = await pool.query(`select * from favcolor where user_id = $1`, [req.user])
+        const favColorIds = await pool.query(query.colors.GET_FAV_COLORS_ID, [req.user])
 
         res.json(favColorIds.rows)        
         
@@ -49,9 +49,9 @@ router.get("/favIds", auth, async (req, res) => {
 
 router.post("/fav", auth, async (req, res) => {
     try {
-        const { fav } = req.body
+        const { fav } = req.body;
 
-        const userId = req.user
+        const userId = req.user;
 
         const colorIds = fav.reduce((prevStr, curr, currIndex) => {
 
@@ -60,13 +60,14 @@ router.post("/fav", auth, async (req, res) => {
             }
 
             return prevStr + `('${userId}', ${curr}), `
-        }, '')
+        }, '');
 
         console.log(colorIds);
 
-        const favColors = await pool.query(`INSERT INTO favcolor (user_id, color_id) VALUES ${colorIds}`);
+        const favColors = await pool.query(`${query.colors.SAVE_FAV_COLORS} ${colorIds}`);
 
-        res.json("Selected colors favourited.")
+        res.json("Selected colors favourited.");
+
     } catch (err) {
         console.error(err.message)
     }

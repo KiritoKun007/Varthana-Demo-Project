@@ -1,0 +1,14 @@
+/home/zodiac0606/Projects/colors-full-stack/server/node_modules/pino/lib/levels.js:163
+    throw Error(`default level:${defaultLevel} must be included in custom levels`)
+    ^
+
+Error: default level:debug node index.js | ./node_modules/.bin/pino-pretty must be included in custom levels
+    at assertDefaultLevelFound (/home/zodiac0606/Projects/colors-full-stack/server/node_modules/pino/lib/levels.js:163:11)
+    at pino (/home/zodiac0606/Projects/colors-full-stack/server/node_modules/pino/pino.js:150:3)
+    at Object.<anonymous> (/home/zodiac0606/Projects/colors-full-stack/server/index.js:9:16)
+    at Module._compile (internal/modules/cjs/loader.js:1176:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1196:10)
+    at Module.load (internal/modules/cjs/loader.js:1040:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:929:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+    at internal/main/run_main_module.js:17:47

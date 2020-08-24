@@ -1,6 +1,16 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+require('dotenv').config();
+
+const pino = require('pino');
+const expressPino = require('express-pino-logger');
+
+const logger = pino({ level: 'debug' });
+const expressLogger = expressPino({ logger });
+const PORT = process.env.PORT || 3000;
+
+app.use(expressLogger);
 
 // middleware
 app.use(cors());
@@ -21,6 +31,6 @@ app.use("/colors", require("./routes/colors"));
 app.use("/user", require("./routes/user"));
 
 // PORT
-app.listen(5000, () => {
-    console.log("Server has started on port 5000")
+app.listen(PORT, () => {
+    logger.info("Server has started on port 6543")
 });

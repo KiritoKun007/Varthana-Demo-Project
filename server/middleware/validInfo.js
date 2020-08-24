@@ -9,13 +9,19 @@ module.exports = (req, res, next) => {
         console.log(!email.length);
 
         if(![email, password, username].every(Boolean)) {
-            return res.status(401).json("Missing Credentials");
+            return res.status(401).json({
+                status: 401,
+                msg: "Missing Credentials. Please fill up the form before submitting."
+            });
         } else if (!validEmail(email)) {
             return res.status(401).json("Invalid Email");
         }
     } else if (req.path === "/login") {
         if(![email, password].every(Boolean)) {
-            return res.status(401).json("Missing Credentials");
+            return res.status(401).json({
+                status: 401,
+                msg: "Missing Credentials. Please fill up the form before submitting."
+            });
         } else if (!validEmail(email)) {
             return res.status(401).json("Invalid Email");
         }
