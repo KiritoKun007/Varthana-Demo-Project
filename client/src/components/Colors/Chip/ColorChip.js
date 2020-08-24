@@ -23,6 +23,12 @@ const ColorChip = ({ color }) => {
                 opacity: isDragging? 0.2: 1
             }} >
             <div style={{backgroundColor: color.hex_code}} className={classes.colorChip}>
+                <div className={classes.draggableElement}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
                 <p>{color.name}</p>
             </div>
         </div>

@@ -5,8 +5,11 @@ export const GET_FAV_COLOR_IDS = "GET_FAV_COLOR_IDS";
 
 export const IS_AUTH = "IS_AUTH";
 export const REGISTRATION = "REGISTRATION";
+export const REGISTRATION_FAIL = "REGISTRATION_FAIL";
 export const LOGIN = "LOGIN";
+export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 
 export const GET_USER = "GET_USER";
 export const EDIT_USER = "EDIT_USER";
+export const ME_FROM_TOKEN = "ME_FROM_TOKEN"

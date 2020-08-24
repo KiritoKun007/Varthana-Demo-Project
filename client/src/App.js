@@ -32,6 +32,17 @@ function App() {
 
   const dispatch = useDispatch()
 
+  // const loadUserFromToken = async () => {
+  //   let token = localStorage.getItem("token");
+
+  //   if(!token || token === '') {
+  //     return;
+  //   }
+
+  //   let user
+
+  // }
+
   useEffect(() => {
     dispatch(actions.verifyAuth())
   }, [dispatch])

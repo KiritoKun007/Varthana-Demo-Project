@@ -4,7 +4,8 @@ const initialState = {
     isAuth: false,
     token: null,
     user: null,
-    expire: null
+    expire: null,
+    msg: ''
 }
 
 const authReducer = (state = initialState, action) => {
@@ -14,6 +15,18 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuth: true,
                 token: action.token
+            }
+
+        case actionTypes.REGISTRATION_FAIL:
+            return {
+                ...state,
+                msg: action.msg
+            }
+
+        case actionTypes.LOGIN_FAIL:
+            return {
+                ...state,
+                msg: action.msg
             }
 
         case actionTypes.LOGIN:

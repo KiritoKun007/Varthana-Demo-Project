@@ -1,10 +1,11 @@
 import * as actionTypes from './actionTypes';
 import { logout } from './auth';
+import { BASE_URL } from '../../constants/constants';
 
 export const getUser = () => {
     return async dispatch => {
         try {   
-            const user = await fetch("http://localhost:5000/user", {
+            const user = await fetch(`${BASE_URL}/user`, {
                 method: "GET",
                 headers: {
                     token: localStorage.token
@@ -29,7 +30,7 @@ export const editUser = (user) => {
         try {
             const body = {...user};
 
-            const updatedUser = await fetch("http://localhost:5000/user/edit", {
+            const updatedUser = await fetch(`${BASE_URL}/user/edit`, {
                 method: 'PUT',
                 headers: {
                     token: localStorage.token,
@@ -55,7 +56,7 @@ export const inActiveUser = () => {
     return async dispatch => {
         try {
             
-            const inActive = await fetch("http://localhost:5000/user/inActive", {
+            const inActive = await fetch(`${BASE_URL}/user/inActive`, {
                 method: 'PUT',
                 headers: {
                     token: localStorage.token

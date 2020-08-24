@@ -1,9 +1,10 @@
 import * as actionTypes from './actionTypes';
+import { BASE_URL } from '../../constants/constants';
 
 export const getColors = () => {
     return async dispatch => {
         try {
-            const colors = await fetch("http://localhost:5000/colors");
+            const colors = await fetch(`${BASE_URL}/colors`);
     
             const colorsData = await colors.json()
 
@@ -21,7 +22,7 @@ export const getColors = () => {
 export const getFavColorsId = () => {
     return async dispatch => {
         try {
-            const favColorId = await fetch("http://localhost:5000/colors/favIds", {
+            const favColorId = await fetch(`${BASE_URL}/colors/favIds`, {
                 method: 'GET',
                 headers: {
                     token: localStorage.token
@@ -56,8 +57,8 @@ export const saveFavColors = (fav) => {
     return async dispatch => {
         try {
             const body = { fav }
-    
-            const updateResponse = await fetch(`http://localhost:5000/colors/fav`, {
+            
+            const updateResponse = await fetch(`${BASE_URL}/colors/fav`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -66,7 +67,11 @@ export const saveFavColors = (fav) => {
                 body: JSON.stringify(body)
             }) 
     
-            window.location = "/";
+            dispatch({
+                type: actionTypes.SAVE_FAVOURITE_COLORS,
+                successMsg: "Favourite colors successfully saved."
+            })
+
         } catch (err) {
             console.error(err.message)
         }

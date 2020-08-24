@@ -3,7 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     colors: [],
     newFavColorsId: [],
-    favColorsId: []
+    favColorsId: [],
+    msg: ''
 };
 
 const getAllColors = (state, action) => {
@@ -20,13 +21,16 @@ const getAllColors = (state, action) => {
 }
 
 const draggedFavColor = (state, action) => {
+    
     const colors = [...state.colors];
+
     let fav = colors.map(color => {
                         if(color.color_id === action.id) {
                             color.is_fav = true
                         }
                         return color;
                     })
+
     return {
         ...state,
         colors: fav,
@@ -57,11 +61,19 @@ const getFavColorsIds = (state, action) => {
     }
 }
 
+const saveFavouriteColors = (state, action) => {
+    return {
+        ...state,
+        msg: action.successMsg
+    }
+}
+
 const colorsReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_ALL_COLORS: return getAllColors(state, action);
         case actionTypes.DRAGGED_FAV_COLOR: return draggedFavColor(state, action);
         case actionTypes.GET_FAV_COLOR_IDS: return getFavColorsIds(state, action);
+        case actionTypes.SAVE_FAVOURITE_COLORS: return saveFavouriteColors(state, action);
         default:
             return state;
     }

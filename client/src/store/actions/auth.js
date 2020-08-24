@@ -1,11 +1,12 @@
 import * as actionTypes from "./actionTypes"; 
+import { BASE_URL } from "../../constants/constants";
 
 export const registerForm = (inputs) => {
     return async dispatch => {
         try {
             const body = { ...inputs }
 
-            const response = await fetch("http://localhost:5000/auth/register", {
+            const response = await fetch(`${BASE_URL}/auth/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -15,15 +16,30 @@ export const registerForm = (inputs) => {
 
             const resData = await response.json()
 
-            localStorage.setItem("token", resData.token)
+            console.log(resData)
 
-            dispatch({
-                type: actionTypes.REGISTRATION,
-                token: resData.token
-            })
+            if (!resData.status) {
+                localStorage.setItem("token", resData.token)
+    
+                dispatch({
+                    type: actionTypes.REGISTRATION,
+                    token: resData.token
+                })
+            } else {
+
+                dispatch({
+                    type: actionTypes.REGISTRATION_FAIL,
+                    msg: resData.msg
+                })
+            }
 
         } catch (err) {
-            console.error(err.message)
+            console.error(err)
+
+            dispatch({
+                type: actionTypes.REGISTRATION_FAIL,
+                msg: err
+            })
         }
     }
 }
@@ -33,7 +49,7 @@ export const loginForm = (inputs) => {
         try {
             const body = { ...inputs }
 
-            const response = await fetch("http://localhost:5000/auth/login", {
+            const response = await fetch(`${BASE_URL}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -43,15 +59,27 @@ export const loginForm = (inputs) => {
 
             const resData = await response.json()
 
-            localStorage.setItem("token", resData.token)
+            if (!resData.status) {
+                localStorage.setItem("token", resData.token)
+    
+                dispatch({
+                    type: actionTypes.LOGIN,
+                    token: resData.token
+                })
+            } else {
 
-            dispatch({
-                type: actionTypes.LOGIN,
-                token: resData.token
-            })
+                dispatch({
+                    type: actionTypes.LOGIN_FAIL,
+                    msg: resData.msg
+                })
+            }
 
         } catch (err) {
-            console.error(err.message)
+            console.error(err)
+            dispatch({
+                type: actionTypes.LOGIN_FAIL,
+                msg: err
+            })
         }
     }
 }
@@ -64,12 +92,29 @@ export const logout = () => {
     }
 }
 
+export const meFromToken = async (tokenFromStorage) => {
+    const request = await fetch(`${BASE_URL}/auth/user/from/token`, {
+        method: "GET",
+        token: {
+            token: tokenFromStorage
+        }
+    });
+
+    const reqData = await request.json();
+
+    return {
+        type: actionTypes.ME_FROM_TOKEN,
+        payload: reqData
+    }
+}
+
 export const verifyAuth = () => {
+
     return async dispatch => {
         try {
 
             if(localStorage.token) {
-                const response = await fetch("http://localhost:5000/auth/verify", {
+                const response = await fetch(`${BASE_URL}/auth/verify`, {
                   method: "GET",
                   headers: {
                     token: localStorage.token
