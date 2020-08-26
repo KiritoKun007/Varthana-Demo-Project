@@ -41,7 +41,9 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuth: false,
-                token: null
+                token: null,
+                user: null,
+                expire: null
             }
 
         case actionTypes.IS_AUTH:           

@@ -77,7 +77,7 @@ const Register = () => {
         if(isAuth) {
             history.push("/")
         }
-    }, [])
+    }, [isAuth])
 
     useEffect(() => {
 

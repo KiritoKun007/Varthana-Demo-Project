@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import DropDown from '../../UI/DropDown/DropDown';
 import { useState } from 'react';
 import { useRef } from 'react';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -21,12 +23,6 @@ const NavigationItems = () => {
         {pathName: "Profile", path: "/user"},
         {pathName: "Logout", path: "/user/logout"}
     ]
-
-    let logout = ''
-
-    if(user) {
-        logout = capitalizeFirstLetter(user.user_name);
-    }
 
     const dropdownRef = useRef()
 
@@ -71,7 +67,7 @@ const NavigationItems = () => {
                             dropDownList={dropDownList}
                             closeDropDown={closeDropDown}
                             openDropDown={openDropDown} >
-                            {logout}
+                            {user.user_name && capitalizeFirstLetter(user.user_name) }
                         </DropDown>
                     </Fragment>
                 )

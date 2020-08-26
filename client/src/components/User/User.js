@@ -1,9 +1,8 @@
 import React from 'react'
-import { useRouteMatch, Switch, Route } from 'react-router-dom'
+import { useRouteMatch, Switch, Route, useHistory } from 'react-router-dom'
 
 import Profile from './Profile/Profile';
 import Logout from '../Auth/Logout/Logout';
-import Sidebar from '../UI/Sidebar/Sidebar';
 
 import classes from './User.module.css';
 import EditProfile from './Profile/EditProfile/EditProfile';

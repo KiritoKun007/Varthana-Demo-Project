@@ -2,9 +2,10 @@ import React, { Fragment } from 'react'
 import classes from './Logout.module.css'
 
 import * as actions from '../../../store/actions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const Logout = () => {
 
@@ -12,9 +13,19 @@ const Logout = () => {
 
     const dispatch = useDispatch()
 
+    const user = useSelector(state => state.auth.user)
+
     const logout = () => {
         dispatch(actions.logout())
     } 
+
+    let history = useHistory();
+
+    useEffect(() => {
+        if(!user) {
+            history.push("/login");
+        }
+    }, [user])
 
     const [cancel, setCancel] = useState(false)
 

@@ -34,11 +34,7 @@ const Profile = () => {
             });
         }
     }, [msg])
-
-    useEffect(() => {
-        dispatch(actions.getUser())
-    }, [dispatch])
-
+    
     const editProfileHandler = (e) => {
         e.preventDefault()
         history.push(`${url}/edit`)

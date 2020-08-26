@@ -15,11 +15,9 @@ const EditProfile = () => {
 
     const dispatch = useDispatch()
 
-    const { user_name, user_email } = user
-
     const [profileUser, setProfileUser] = useState({
-        username: user_name,
-        email: user_email 
+        username: user ? user.user_name: '',
+        email: user ? user.user_email: '' 
     })
 
     const onChangeInput = e => {
