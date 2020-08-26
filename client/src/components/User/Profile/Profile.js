@@ -2,20 +2,42 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import classes from './Profile.module.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
 import * as actions from '../../../store/actions'
 
+import { ToastContainer, toast } from 'react-toastify';
+import { useEffect } from 'react';
+
 const Profile = () => {
 
     const user = useSelector(state => state.auth.user)
+    const msg = useSelector(state => state.auth.successMsg);
 
     const dispatch = useDispatch()
 
     let history = useHistory();
     let { url } = useRouteMatch();
 
-    const { user_name, user_email } = user
+    useEffect(() => {
+        if(msg !== '') {
+            toast.success(msg, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }, [msg])
+
+    useEffect(() => {
+        dispatch(actions.getUser())
+    }, [dispatch])
 
     const editProfileHandler = (e) => {
         e.preventDefault()
@@ -31,17 +53,28 @@ const Profile = () => {
     return (
         <div className={classes.profileContainer}>
 
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
+
             <h4>My Profile</h4>
             <hr/>
 
             <div className={classes.profileDetails}>
                 <div className={classes.subDetail}>
                     <p>Username</p>
-                    <p>{user_name}</p>
+                    <p>{user && user.user_name}</p>
                 </div>
                 <div className={classes.subDetail}>
                     <p>Email</p>
-                    <p>{user_email}</p>
+                    <p>{ user && user.user_email}</p>
                 </div>
             </div>
 

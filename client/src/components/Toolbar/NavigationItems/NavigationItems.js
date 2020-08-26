@@ -2,6 +2,9 @@ import React, { Fragment } from 'react';
 import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 import { useSelector } from 'react-redux';
+import DropDown from '../../UI/DropDown/DropDown';
+import { useState } from 'react';
+import { useRef } from 'react';
 
 const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -12,14 +15,41 @@ const NavigationItems = () => {
     const isAuthenticated = useSelector(state => state.auth.isAuth);
     const user = useSelector(state => state.auth.user);
 
+    const [show, setShow] = useState(false)
+
+    const dropDownList = [
+        {pathName: "Profile", path: "/user"},
+        {pathName: "Logout", path: "/user/logout"}
+    ]
+
     let logout = ''
 
     if(user) {
         logout = capitalizeFirstLetter(user.user_name);
     }
 
+    const dropdownRef = useRef()
+
+    const openCloseDropDown = (e) => {
+
+        if(dropdownRef.current.contains(e.target)) {
+            setShow((prevState) => {
+                return !prevState
+            })
+            return;
+        }
+    } 
+
+    const closeDropDown = () => {
+        setShow(false)
+    }
+
+    const openDropDown = () => {
+        setShow(true)
+    }
+
     return (
-        <ul className={classes.NavigationItems}>
+        <ul className={classes.NavigationItems} ref={dropdownRef}>
             {
                 !isAuthenticated ? (
                     <Fragment>
@@ -32,12 +62,17 @@ const NavigationItems = () => {
                     </Fragment>
                 ) : (
                     <Fragment>
-                        <NavigationItem link="/color" >
+                        <NavigationItem link="/" >
                             Home
                         </NavigationItem>
-                        <NavigationItem link="/user" >
+                        <DropDown 
+                            show={show}
+                            openCloseDropDown={openCloseDropDown}
+                            dropDownList={dropDownList}
+                            closeDropDown={closeDropDown}
+                            openDropDown={openDropDown} >
                             {logout}
-                        </NavigationItem>
+                        </DropDown>
                     </Fragment>
                 )
             }

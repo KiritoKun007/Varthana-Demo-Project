@@ -4,7 +4,12 @@ import { BASE_URL } from '../../constants/constants';
 export const getColors = () => {
     return async dispatch => {
         try {
-            const colors = await fetch(`${BASE_URL}/colors`);
+            const colors = await fetch(`${BASE_URL}/colors`, {
+                method: 'GET',
+                headers: {
+                    token: localStorage.token
+                }
+            });
     
             const colorsData = await colors.json()
 
@@ -75,5 +80,11 @@ export const saveFavColors = (fav) => {
         } catch (err) {
             console.error(err.message)
         }
+    }
+}
+
+export const onCancel = () => {
+    return {
+        type: actionTypes.CANCEL_FAV_COLORS
     }
 }

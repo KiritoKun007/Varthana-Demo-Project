@@ -9,7 +9,8 @@ export const registerForm = (inputs) => {
             const response = await fetch(`${BASE_URL}/auth/register`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    token: localStorage.token
                 },
                 body: JSON.stringify(body)
             });
@@ -52,7 +53,8 @@ export const loginForm = (inputs) => {
             const response = await fetch(`${BASE_URL}/auth/login`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    token: localStorage.token
                 },
                 body: JSON.stringify(body)
             });
@@ -128,7 +130,8 @@ export const verifyAuth = () => {
                     payload: {
                         isAuth: resData.isAuth,
                         token: localStorage.token,
-                        expiresIn: resData.expiryTime
+                        expiresIn: resData.expiryTime,
+                        user: resData.user
                     }
                 });
             }        

@@ -17,8 +17,6 @@ const User = () => {
     return (
         <div className={classes.Container}>
 
-            <Sidebar />
-
             <Switch>
                 <Route exact path={path} >
                     <Profile />

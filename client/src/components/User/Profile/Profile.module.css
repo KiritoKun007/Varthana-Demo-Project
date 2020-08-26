@@ -29,7 +29,7 @@
     padding: 1rem 0;
 }
 
-.profileContainer button {
+.btnContainer button {
     padding: 5px 15px;
     border-radius: 4px;
     font-weight: 600;
@@ -42,10 +42,10 @@
     background-color: transparent;
 }
 
-.profileContainer button:hover {
+.btnContainer button:hover {
     color: #40a4c8;
 }
 
-.profileContainer button:focus {
+.btnContainer button:focus {
     outline: none;
 }

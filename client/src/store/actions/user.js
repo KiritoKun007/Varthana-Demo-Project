@@ -43,7 +43,8 @@ export const editUser = (user) => {
 
             dispatch({
                 type: actionTypes.EDIT_USER,
-                user: data
+                user: data,
+                msg: "User details updated successfully."
             })
 
         } catch (err) {

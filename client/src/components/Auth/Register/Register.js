@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Input from '../../UI/Input/Input';
 import { checkValidity } from '../../../util/checkValidity';
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
 
@@ -59,6 +60,8 @@ const Register = () => {
 
     const [show, setShow] = useState(false)
     const errorMessage = useSelector(state => state.auth.msg)
+    const isAuth = useSelector(state => state.auth.isAuth)
+    let history = useHistory()
 
     let timer = null;
 
@@ -69,6 +72,12 @@ const Register = () => {
             timer = null
         }, 10000);
     }
+
+    useEffect(() => {
+        if(isAuth) {
+            history.push("/")
+        }
+    }, [])
 
     useEffect(() => {
 

@@ -5,7 +5,8 @@ const initialState = {
     token: null,
     user: null,
     expire: null,
-    msg: ''
+    msg: '',
+    successMsg: ''
 }
 
 const authReducer = (state = initialState, action) => {
@@ -49,7 +50,8 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuth: action.payload.isAuth ? true : false,
                 token: action.payload.token,
-                expire: action.payload.expiresIn
+                expire: action.payload.expiresIn,
+                user: action.payload.user
             }
 
         case actionTypes.GET_USER:
@@ -61,7 +63,8 @@ const authReducer = (state = initialState, action) => {
         case actionTypes.EDIT_USER:
             return {
                 ...state,
-                user: action.user
+                user: action.user,
+                successMsg: action.msg
             }
     
         default:

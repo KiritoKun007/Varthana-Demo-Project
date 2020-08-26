@@ -3,6 +3,7 @@ export {
     favColor,
     saveFavColors,
     getFavColorsId,
+    onCancel
 } from './colors';
 
 export {

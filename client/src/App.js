@@ -2,9 +2,6 @@ import React, { Fragment } from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-
 import './App.css';
 
 // Components
@@ -23,25 +20,14 @@ import {
 
 import * as actions from './store/actions/index';
 import Toolbar from './components/Toolbar/Toolbar';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
-
-  const isAuthenticated = useSelector(state => state.auth.isAuth)
 
   const expireTime = useSelector(state => state.auth.expire)
 
   const dispatch = useDispatch()
-
-  // const loadUserFromToken = async () => {
-  //   let token = localStorage.getItem("token");
-
-  //   if(!token || token === '') {
-  //     return;
-  //   }
-
-  //   let user
-
-  // }
 
   useEffect(() => {
     dispatch(actions.verifyAuth())
@@ -56,52 +42,17 @@ function App() {
   return (
     <Fragment>
       <Router>
-
         <Toolbar />
-
-          <Switch>
-
-            <Route 
-              path="/color"
-              render={
-                props => isAuthenticated ? (
-                  <DndProvider backend={HTML5Backend}>
-                    <Colors {...props} />
-                  </DndProvider>
-                ) : (
-                  <Redirect to="/login" />
-                ) } />
-
-            <Route 
-              path="/user"
-              render={
-                props => isAuthenticated ? (
-                  <User {...props} />
-                ) : (
-                  <Redirect to="/login" />
-                ) } />  
-
-            <Route 
-              path="/login"
-              render={props => 
-                !isAuthenticated ? (
-                  <Login {...props} />
-                ) : (
-                  <Redirect to="/color" />
-                ) } />
-
-            <Route
-              path="/register"
-              render={props => 
-                !isAuthenticated ? (
-                  <Register {...props} />
-                ) : (
-                  <Redirect to="/login" />
-                ) } />
-
-            { !isAuthenticated && <Redirect to="/login" from="/" /> }
-
-          </Switch>
+        <Switch>
+          <Route path="/" exact render={props => (
+            <DndProvider backend={HTML5Backend}>
+              <Colors {...props} />
+            </DndProvider>
+          )} />
+          <Route path="/user" component={User} />  
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
       </Router>
     </Fragment>
   );

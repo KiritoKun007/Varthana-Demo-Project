@@ -39,7 +39,9 @@ const EditProfile = () => {
     const saveProfileHandler = (e) => {
         e.preventDefault();
 
-        dispatch(actions.editUser(profileUser))
+        dispatch(actions.editUser(profileUser)).then(res => {
+            history.push("/user")
+        })
     }
 
     return (

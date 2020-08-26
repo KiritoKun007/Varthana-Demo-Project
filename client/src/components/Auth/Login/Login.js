@@ -8,6 +8,7 @@ import classes from './Login.module.css'
 import { checkValidity } from '../../../util/checkValidity'
 import Input from '../../UI/Input/Input'
 import { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 const Login = () => {
 
@@ -45,6 +46,8 @@ const Login = () => {
 
     const [show, setShow] = useState(false)
     const errorMessage = useSelector(state => state.auth.msg)
+    const isAuth = useSelector(state => state.auth.isAuth)
+    let history = useHistory()
 
     let timer = null;
 
@@ -55,6 +58,12 @@ const Login = () => {
             timer = null
         }, 10000);
     }
+
+    useEffect(() => {
+        if(isAuth) {
+            history.push("/")
+        }
+    }, [])
 
     useEffect(() => {
 

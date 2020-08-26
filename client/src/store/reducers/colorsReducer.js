@@ -4,7 +4,7 @@ const initialState = {
     colors: [],
     newFavColorsId: [],
     favColorsId: [],
-    msg: ''
+    successMsg: ''
 };
 
 const getAllColors = (state, action) => {
@@ -64,7 +64,25 @@ const getFavColorsIds = (state, action) => {
 const saveFavouriteColors = (state, action) => {
     return {
         ...state,
-        msg: action.successMsg
+        successMsg: action.successMsg,
+        newFavColorsId: []
+    }
+}
+
+const cancelFavColors = (state, action) => {
+
+    const colors = [...state.colors].map(color => {
+        if([...state.newFavColorsId].includes(color.color_id)) {
+            color.is_fav = false
+        }
+
+        return color
+    })
+
+    return {
+        ...state,
+        colors: colors,
+        newFavColorsId: []
     }
 }
 
@@ -74,6 +92,7 @@ const colorsReducer = (state = initialState, action) => {
         case actionTypes.DRAGGED_FAV_COLOR: return draggedFavColor(state, action);
         case actionTypes.GET_FAV_COLOR_IDS: return getFavColorsIds(state, action);
         case actionTypes.SAVE_FAVOURITE_COLORS: return saveFavouriteColors(state, action);
+        case actionTypes.CANCEL_FAV_COLORS: return cancelFavColors(state, action);
         default:
             return state;
     }
