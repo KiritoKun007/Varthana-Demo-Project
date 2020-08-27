@@ -1,7 +1,7 @@
 import React from 'react'
 import ColorChip from '../Chip/ColorChip'
 
-const ColorBox = ({ colors, isDrag }) => {
+const ColorBox = ({ colors, handleColorModal }) => {
 
     console.log(colors)
 
@@ -10,7 +10,8 @@ const ColorBox = ({ colors, isDrag }) => {
         colorChips = colors.map(color => (
             <ColorChip 
                 key={color.color_id}
-                color={color} />
+                color={color}
+                handleColorModal={() => handleColorModal(color.color_id)} />
         ))
     } 
 

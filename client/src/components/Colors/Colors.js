@@ -16,6 +16,7 @@ import { ItemTypes } from '../../util/items';
 import Button from '../UI/Button/Button';
 
 import { ToastContainer, toast } from 'react-toastify';
+import { Redirect, useHistory } from 'react-router-dom';
 
 const Colors = () => {
 
@@ -25,7 +26,17 @@ const Colors = () => {
 
     const successMsg = useSelector(state => state.colors.successMsg)
 
+    const user = useSelector(state => state.auth.user);
+
+    let history = useHistory();
+
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if(user === 'Not Authorized') {
+            history.push('/login');
+        }
+    }, [user])
 
     useEffect(() => {
 
@@ -84,11 +95,19 @@ const Colors = () => {
     const onSaveHandler = (e) => {
         e.preventDefault();
         dispatch(actions.saveFavColors(favColorsId))
+    }
 
+    const handleColorModal = (id) => {
+        console.log(id)
     }
 
     return (
         <Fragment>
+
+            {/* <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+                {orderSummary}
+            </Modal> */}
+
             <ToastContainer 
                 position="top-right"
                 autoClose={5000}
@@ -106,7 +125,7 @@ const Colors = () => {
                         <div className='dFlex'>
                             <ColorBox 
                                 colors={allColorExceptFav}
-                                isDrag={true} />
+                                handleColorModal={handleColorModal} />
                         </div>
                     </div>
                     <div 
@@ -120,7 +139,7 @@ const Colors = () => {
                             <div className='dFlex'>
                                 <FavColorBox 
                                     colors={favColors}
-                                    isDrag={false} />
+                                    handleColorModal={handleColorModal} />
                             </div>
                         </div>
                         <div className='btnContainer'>

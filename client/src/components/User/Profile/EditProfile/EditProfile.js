@@ -6,6 +6,7 @@ import { useState } from 'react';
 import * as actions from '../../../../store/actions';
 
 import classes from './EditProfile.module.css';
+import { useEffect } from 'react';
 
 const EditProfile = () => {
 
@@ -16,9 +17,18 @@ const EditProfile = () => {
     const dispatch = useDispatch()
 
     const [profileUser, setProfileUser] = useState({
-        username: user ? user.user_name: '',
-        email: user ? user.user_email: '' 
+        username: '',
+        email: '' 
     })
+
+    useEffect(() => {
+        if(user !== 'Not Authorized' && user !== null) {
+            setProfileUser({
+                username: user.user_name,
+                email: user.user_email
+            })
+        }
+    }, [user])
 
     const onChangeInput = e => {
         e.preventDefault()

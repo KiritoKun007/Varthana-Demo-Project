@@ -44,14 +44,14 @@ function App() {
       <Router>
         <Toolbar />
         <Switch>
+          <Route path="/login" exact component={Login} />
+          <Route path="/register" component={Register} />
           <Route path="/" exact render={props => (
             <DndProvider backend={HTML5Backend}>
               <Colors {...props} />
             </DndProvider>
           )} />
           <Route path="/user" component={User} />  
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
         </Switch>
       </Router>
     </Fragment>

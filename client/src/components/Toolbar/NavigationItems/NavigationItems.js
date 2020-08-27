@@ -67,7 +67,7 @@ const NavigationItems = () => {
                             dropDownList={dropDownList}
                             closeDropDown={closeDropDown}
                             openDropDown={openDropDown} >
-                            {user.user_name && capitalizeFirstLetter(user.user_name) }
+                            {user !== null && user.user_name ? capitalizeFirstLetter(user.user_name) : null }
                         </DropDown>
                     </Fragment>
                 )

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const pool = require("../db"); 
 const auth = require("../middleware/auth");
 const queries = require("../queries/queries");
+const validInfo = require("../middleware/validInfo");
 
 // Get User detail from token
 
@@ -17,7 +18,7 @@ router.get("/", auth, async (req, res) => {
     }
 })
 
-router.put("/edit", auth, async (req, res) => {
+router.put("/edit", auth, validInfo, async (req, res) => {
     try {
 
         const {username, email} = req.body

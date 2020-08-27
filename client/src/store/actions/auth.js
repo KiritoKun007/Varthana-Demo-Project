@@ -69,7 +69,7 @@ export const loginForm = (inputs) => {
                     token: resData.token
                 })
             } else {
-
+                console.log("Login Fail")
                 dispatch({
                     type: actionTypes.LOGIN_FAIL,
                     msg: resData.msg

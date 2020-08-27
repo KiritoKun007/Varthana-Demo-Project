@@ -22,7 +22,7 @@ const Logout = () => {
     let history = useHistory();
 
     useEffect(() => {
-        if(!user) {
+        if( user === null ) {
             history.push("/login");
         }
     }, [user])
@@ -36,7 +36,7 @@ const Logout = () => {
     return (
         <div className={classes.Logout}>
             {cancel ? (
-                <Redirect to="/color" />
+                <Redirect to="/" />
             ) : (
                 <Fragment>
                     <h4>Are you sure?</h4>

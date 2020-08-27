@@ -24,9 +24,14 @@ const draggedFavColor = (state, action) => {
     
     const colors = [...state.colors];
 
+    let isDraggable = false
+
     let fav = colors.map(color => {
                         if(color.color_id === action.id) {
-                            color.is_fav = true
+                            if(!color.is_fav) {
+                                color.is_fav = true
+                                isDraggable = true
+                            }
                         }
                         return color;
                     })
@@ -34,7 +39,7 @@ const draggedFavColor = (state, action) => {
     return {
         ...state,
         colors: fav,
-        newFavColorsId: [...state.newFavColorsId].concat(action.id)
+        newFavColorsId: isDraggable ? [...state.newFavColorsId].concat(action.id) : [...state.newFavColorsId]
     }
 }
 

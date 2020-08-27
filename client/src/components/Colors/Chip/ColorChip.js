@@ -3,7 +3,7 @@ import classes from './ColorChip.module.css';
 import { useDrag } from 'react-dnd'
 import { ItemTypes } from '../../../util/items';
 
-const ColorChip = ({ color }) => {
+const ColorChip = ({ color, handleColorModal }) => {
 
     const [{isDragging}, drag] = useDrag({
         item: {
